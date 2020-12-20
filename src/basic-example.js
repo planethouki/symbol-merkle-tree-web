@@ -157,3 +157,6 @@ async function drawGraph() {
     messageElement.value = successString;
 
 }
+
+
+document.getElementById("buttonSubmit").onclick = _.debounce(drawGraph, 200);

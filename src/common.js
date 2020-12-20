@@ -27,3 +27,25 @@ function hexToUint8Array(hex) {
         return parseInt(h, 16)
     }))
 }
+
+(() => {
+    /**
+     * Create Nav
+     */
+    const pageList = [
+        { href: "index.html", text: "Account" },
+        { href: "namespace.html", text: "Namespace" },
+        { href: "mosaic.html", text: "Mosaic" }
+    ];
+    pageList.forEach((item) => {
+        const li = document.createElement("li");
+        li.className = "nav-item";
+        const a = document.createElement("a");
+        a.className = "nav-link";
+        a.href = item.href;
+        a.innerText = item.text;
+        li.appendChild(a);
+        document.getElementById("navPageList").appendChild(li);
+    });
+
+})();

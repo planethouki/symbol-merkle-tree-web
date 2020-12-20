@@ -1,30 +1,10 @@
-const BASE_URL = "https://d2o8j5pgb7wqnq.cloudfront.net";
-
 const messageElement = document.getElementById("messageTextArea");
-
-async function sha3(hex) {
-    const a = await hashwasm.sha3(hexToUint8Array(hex), 256);
-    return a.toUpperCase();
-}
-
-function uint8ArrayToHex (arrayBuffer) {
-    return [...new Uint8Array(arrayBuffer)]
-        .map (b => b.toString(16).padStart(2, "0"))
-        .join ("")
-        .toUpperCase();
-}
-
-function hexToUint8Array(hex) {
-    return new Uint8Array(hex.toLowerCase().match(/[\da-f]{2}/gi).map(function (h) {
-        return parseInt(h, 16)
-    }))
-}
 
 async function drawGraph() {
 
     messageElement.value = "fetching...";
 
-    const accountIdentifier = document.getElementById("inputAddressPublicKey").value;
+    const identifier = document.getElementById("inputId").value;
 
     const chartConfig = [
         {
@@ -39,13 +19,13 @@ async function drawGraph() {
     chartConfig.push(rootNode);
 
     const req = new Request(
-        `${BASE_URL}/accounts/${accountIdentifier}`,
+        `${BASE_URL}/namespaces/${identifier}`,
         {
             mode: 'cors'
         }
     );
     const reqMerkle = new Request(
-        `${BASE_URL}/accounts/${accountIdentifier}/merkle`,
+        `${BASE_URL}/namespaces/${identifier}/merkle`,
         {
             mode: 'cors'
         }
@@ -54,7 +34,7 @@ async function drawGraph() {
     let successString = "";
     let errorString = "";
 
-    const { myChart, accountMerkle } = await fetch(reqMerkle).then((res) => {
+    const { myChart, merkle } = await fetch(reqMerkle).then((res) => {
             if (res.ok) {
                 return res.json();
             }
@@ -62,10 +42,10 @@ async function drawGraph() {
                 throw new Error(JSON.stringify(m));
             });
         })
-        .then((accountMerkle) => {
+        .then((merkle) => {
             const depthNodes = {}
-            for (let depth = 0; depth < accountMerkle.tree.length; depth++) {
-                const node = accountMerkle.tree[depth];
+            for (let depth = 0; depth < merkle.tree.length; depth++) {
+                const node = merkle.tree[depth];
                 const depthStr = depth.toString();
                 if (depth === 0) {
                     depthNodes[depthStr] = node.links.map((link) => {
@@ -76,7 +56,7 @@ async function drawGraph() {
                     });
                 } else if (node.type === 255) {
                     const leafHash = node.leafHash;
-                    const previousTree = accountMerkle.tree[depth - 1];
+                    const previousTree = merkle.tree[depth - 1];
                     const previousTreeNodeIndex = previousTree.links.findIndex((previousTreeLink) => {
                         return previousTreeLink.link === leafHash;
                     });
@@ -93,7 +73,7 @@ async function drawGraph() {
                     ]
                 } else {
                     const branchHash = node.branchHash;
-                    const previousTree = accountMerkle.tree[depth - 1];
+                    const previousTree = merkle.tree[depth - 1];
                     const previousTreeNodeIndex = previousTree.links.findIndex((previousTreeLink) => {
                         return previousTreeLink.link === branchHash;
                     });
@@ -111,7 +91,7 @@ async function drawGraph() {
             successString += "success\n";
             return {
                 myChart: new Treant(chartConfig),
-                accountMerkle
+                merkle
             };
         })
         .catch((e) => {
@@ -126,7 +106,7 @@ async function drawGraph() {
         return;
     }
 
-    const accountInfo = await fetch(req)
+    const info = await fetch(req)
         .then((res) => {
             if (res.ok) {
                 return res.json();
@@ -140,19 +120,17 @@ async function drawGraph() {
             return null;
         });
 
-    if (accountInfo === null) {
-        errorString += "マークルツリー上にそのアカウントは存在しません。";
+    if (info === null) {
+        errorString += "マークルツリー上にそのネームスペースは存在しません。";
         messageElement.value = errorString;
         return;
     }
 
-    const hexAddress = accountInfo.account.address;
-    successString += `hexAddress: ${hexAddress}\n`;
-    const accountKey = await sha3(hexAddress);
-    successString += `key: ${accountKey}\n`;
+    const merklePathKey = await sha3(endian(identifier));
+    successString += `key: ${merklePathKey}\n`;
 
-    const accountValue = accountMerkle.tree[accountMerkle.tree.length - 1].value;
-    successString += `value: ${accountValue}`
+    const leafValue = merkle.tree[merkle.tree.length - 1].value;
+    successString += `value: ${leafValue}`
 
     messageElement.value = successString;
 

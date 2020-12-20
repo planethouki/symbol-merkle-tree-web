@@ -1,0 +1,11 @@
+/* optional Container STYLES */
+.chart { height: 600px; margin: 5px; width: 900px; }
+.Treant > .node {}
+.Treant > p {}
+.node-name {
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+}

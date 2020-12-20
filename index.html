@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+            crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="vendor/Treant.css" />
+    <link rel="stylesheet" href="basic-example.css" />
+
+    <title>symbol-merkle-tree-web</title>
+</head>
+<body>
+<div class="container">
+    <div class="mb-3">
+        <label for="inputAddressPublicKey" class="form-label"
+        >address or publicKey</label
+        >
+        <input
+                type="text"
+                class="form-control"
+                id="inputAddressPublicKey"
+                placeholder="e.g. TBXK4X7SBGOMVFKV3BETDYZHUXMCD3L6ZDJEYEY"
+                value="TBXK4X7SBGOMVFKV3BETDYZHUXMCD3L6ZDJEYEY"
+        />
+    </div>
+    <div class="mb-3">
+        <button onclick="drawGraph()" class="btn btn-primary mb-3">
+            Fetch
+        </button>
+    </div>
+    <div class="mb-3">
+        <label for="messageTextArea" class="form-label">Message</label>
+        <textarea class="form-control" id="messageTextArea" rows="3"></textarea>
+    </div>
+</div>
+<div id="tree-simple"></div>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/hash-wasm@4"></script>
+<script src="vendor/raphael.js"></script>
+<script src="vendor/Treant.js"></script>
+<script src="basic-example.js"></script>
+</body>
+</html>

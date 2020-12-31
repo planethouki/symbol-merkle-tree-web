@@ -28,6 +28,30 @@ function hexToUint8Array(hex) {
     }))
 }
 
+function bootstrapPopoverInit() {
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+}
+
+/**
+ *
+ * @param {string} add
+ * @param {string|null|undefined} original
+ */
+function addHtmlClassText(add, original) {
+    if (original === undefined || original === null) {
+        return add;
+    }
+
+    if (original.length === 0) {
+        return add;
+    }
+
+    return original + " " + add;
+}
+
 (() => {
     /**
      * Create Nav

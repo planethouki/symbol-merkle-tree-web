@@ -6,6 +6,11 @@
     font-weight: bold;
 }
 
-.red {
+#tree-simple .red {
     color: red;
+}
+
+#tree-simple .popover-available {
+    text-decoration: underline;
+    cursor: pointer;
 }

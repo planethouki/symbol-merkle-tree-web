@@ -48,10 +48,28 @@ async function drawGraph() {
                 const node = merkle.tree[depth];
                 const depthStr = depth.toString();
                 if (depth === 0) {
+                    rootNode["HTMLclass"] = addHtmlClassText(
+                        "popover-available",
+                        rootNode["HTMLclass"]
+                    );
+                    rootNode.text = {
+                        ...rootNode.text,
+                        "data-bs-container": "body",
+                        "data-bs-toggle": "popover",
+                        "data-bs-placement": "top",
+                        "data-bs-content": `stateHashSubCacheMerkleRoot: ${node.branchHash}`
+                    }
                     depthNodes[depthStr] = node.links.map((link) => {
                         return {
                             parent: rootNode,
-                            text: {name: link.bit}
+                            "HTMLclass": "popover-available",
+                            text: {
+                                name: link.bit,
+                                "data-bs-container": "body",
+                                "data-bs-toggle": "popover",
+                                "data-bs-placement": "top",
+                                "data-bs-content": `branchHash: ${link.link}`
+                            }
                         }
                     });
                 } else if (node.type === 255) {
@@ -61,14 +79,16 @@ async function drawGraph() {
                         return previousTreeLink.link === leafHash;
                     });
                     const parent = depthNodes[depth - 1][previousTreeNodeIndex];
-                    parent.HTMLclass = "red";
+                    parent.HTMLclass = addHtmlClassText("red", parent.HTMLclass);
                     depthNodes[depthStr] = [
                         {
                             parent,
-                            text: {
-                                name: node.path,
-                                desc: `value = ${node.value}`
-                            }
+                            innerHTML: `<p class="node-name">${_.escape(node.path)}</p>` +
+                                '<p class="node-desc">' +
+                                `leafHash = ${_.escape(node.leafHash)}` +
+                                "<br />" +
+                                `value = ${_.escape(node.value)}` +
+                                "</p>"
                         }
                     ]
                 } else {
@@ -78,11 +98,18 @@ async function drawGraph() {
                         return previousTreeLink.link === branchHash;
                     });
                     const parent = depthNodes[depth - 1][previousTreeNodeIndex];
-                    parent.HTMLclass = "red";
+                    parent.HTMLclass = addHtmlClassText("red", parent.HTMLclass);
                     depthNodes[depthStr] = node.links.map((link) => {
                         return {
                             parent,
-                            text: {name: link.bit}
+                            "HTMLclass": "popover-available",
+                            text: {
+                                name: link.bit,
+                                "data-bs-container": "body",
+                                "data-bs-toggle": "popover",
+                                "data-bs-placement": "top",
+                                "data-bs-content": `branchHash: ${link.link}`
+                            }
                         }
                     });
                 }
@@ -136,7 +163,9 @@ async function drawGraph() {
 
     messageElement.value = successString;
 
+    bootstrapPopoverInit();
 }
 
 
 document.getElementById("buttonSubmit").onclick = _.debounce(drawGraph, 200);
+

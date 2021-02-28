@@ -57,7 +57,7 @@ function addHtmlClassText(add, original) {
      * Create Nav
      */
     const pageList = [
-        { href: "index.html", text: "Account" },
+        { href: "account.html", text: "Account" },
         { href: "namespace.html", text: "Namespace" },
         { href: "mosaic.html", text: "Mosaic" }
     ];
@@ -72,4 +72,8 @@ function addHtmlClassText(add, original) {
         document.getElementById("navPageList").appendChild(li);
     });
 
+    /**
+     * Node URL
+     */
+    document.getElementById("node-url").innerText = BASE_URL;
 })();

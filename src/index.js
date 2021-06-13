@@ -12,6 +12,7 @@
         .then(res => res.json())
     const serverPromise = fetch(`${BASE_URL}/node/server`)
         .then(res => res.json())
+        .then(server => server.serverInfo.deployment)
     const { error, result } = await Promise
         .all([nodePromise, networkPromise, chainPromise, serverPromise])
         .then(([node, network, chain, server]) => {
@@ -28,8 +29,8 @@
         { key: "Generation Hash", value: result.node.networkGenerationHashSeed },
         { key: "Height", value: result.chain.height },
         { key: "Network", value: result.network.identifier },
-        { key: "Deployment", value: BASE_URL },
-        { key: "Last Updated", value: BASE_URL },
+        { key: "Deployment", value: `${result.server.deploymentTool}@${result.server.deploymentToolVersion}` },
+        { key: "Last Updated", value: result.server.lastUpdatedDate },
     ]
     const tbody = document.createElement('tbody')
     for (let i = 0; i < nodeInfo.length; i++) {

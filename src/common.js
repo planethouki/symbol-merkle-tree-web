@@ -79,13 +79,17 @@ function createNav(d) {
     });
 }
 
-function getDefaultBaseUrl() {
+function getDefaultBaseUrlTestnet() {
     return "https://dg0nbr5d1ohfy.cloudfront.net:443";
+}
+
+function getDefaultBaseUrlMainnet() {
+    return "https://d3rm6ntu3sichx.cloudfront.net:443";
 }
 
 function getBaseUrl() {
     const ls = localStorage.getItem('NODE_URL')
-    return ls ?? getDefaultBaseUrl()
+    return ls ?? getDefaultBaseUrlTestnet()
 }
 
 function setBaseUrl(url) {

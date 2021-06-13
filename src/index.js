@@ -4,9 +4,14 @@ nodeForm.addEventListener('submit', (e) =>{
     setBaseUrl(nodeForm["inputNodeUrl"].value)
     location.reload()
 });
+nodeForm["inputNodeUrl"].value = BASE_URL
 
-document.getElementById('nodeUrlSetDefault').addEventListener('click', () => {
-    nodeForm["inputNodeUrl"].value = getDefaultBaseUrl()
+document.getElementById('nodeUrlSetDefaultTestnet').addEventListener('click', () => {
+    nodeForm["inputNodeUrl"].value = getDefaultBaseUrlTestnet()
+});
+
+document.getElementById('nodeUrlSetDefaultMainnet').addEventListener('click', () => {
+    nodeForm["inputNodeUrl"].value = getDefaultBaseUrlMainnet()
 });
 
 (async () => {

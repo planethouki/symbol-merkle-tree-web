@@ -51,7 +51,10 @@
         <div class="mb-3">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <label for="inputNodeUrl" class="form-label">Node Url</label>
-                <button type="button" id="nodeUrlSetDefault" class="btn btn-secondary btn-sm">Default</button>
+                <div>
+                    <button type="button" id="nodeUrlSetDefaultTestnet" class="btn btn-secondary btn-sm">Default Testnet</button>
+                    <button type="button" id="nodeUrlSetDefaultMainnet" class="btn btn-secondary btn-sm">Default Mainnet</button>
+                </div>
             </div>
             <input type="text" class="form-control" id="inputNodeUrl" aria-describedby="nodeUrl">
             <div id="nodeUrl" class="form-text">If you are opening with https, you can only use the https url, and don't forget port number.</div>

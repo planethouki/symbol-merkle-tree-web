@@ -11,5 +11,5 @@ demo https://planethouki.github.io/symbol-merkle-tree-web/
 - [x] node info display
 - [ ] mosaic namespace detail display
 - [ ] node selection
-- [ ] unit test
+- [x] unit test
 - [x] github icon move to header

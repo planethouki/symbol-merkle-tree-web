@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "serve": "serve src",
-    "deploy": "gh-pages -d src"
+    "deploy": "gh-pages -d src",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/planethouki/symbol-merkle-tree-web#readme",
   "devDependencies": {
     "gh-pages": "^3.2.0",
+    "jest": "^27.0.4",
     "serve": "^12.0.0"
   }
 }

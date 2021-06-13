@@ -63,24 +63,24 @@ function addHtmlClassText(add, original) {
     return original + " " + add;
 }
 
-function createNav() {
+function createNav(d) {
     const pageList = [
         { href: "account.html", text: "Account" },
         { href: "namespace.html", text: "Namespace" },
         { href: "mosaic.html", text: "Mosaic" }
     ];
     pageList.forEach((item) => {
-        const li = document.createElement("li");
+        const li = d.createElement("li");
         li.className = "nav-item";
-        const a = document.createElement("a");
+        const a = d.createElement("a");
         a.className = "nav-link";
         a.href = item.href;
         a.innerText = item.text;
         li.appendChild(a);
-        document.getElementById("navPageList").appendChild(li);
+        d.getElementById("navPageList").appendChild(li);
     });
 }
 
 (() => {
-    createNav()
+    createNav(document)
 })();

@@ -1,5 +1,3 @@
-const BASE_URL = "https://dg0nbr5d1ohfy.cloudfront.net";
-
 function endian(hex) {
     const result = [];
     let len = hex.length - 2;
@@ -63,23 +61,43 @@ function addHtmlClassText(add, original) {
     return original + " " + add;
 }
 
-(() => {
-    /**
-     * Create Nav
-     */
+function createNav(d) {
     const pageList = [
         { href: "account.html", text: "Account" },
         { href: "namespace.html", text: "Namespace" },
         { href: "mosaic.html", text: "Mosaic" }
     ];
     pageList.forEach((item) => {
-        const li = document.createElement("li");
+        const li = d.createElement("li");
         li.className = "nav-item";
-        const a = document.createElement("a");
+        const a = d.createElement("a");
         a.className = "nav-link";
         a.href = item.href;
         a.innerText = item.text;
         li.appendChild(a);
-        document.getElementById("navPageList").appendChild(li);
+        d.getElementById("navPageList").appendChild(li);
     });
+}
+
+function getDefaultBaseUrlTestnet() {
+    return "https://dg0nbr5d1ohfy.cloudfront.net:443";
+}
+
+function getDefaultBaseUrlMainnet() {
+    return "https://d3rm6ntu3sichx.cloudfront.net:443";
+}
+
+function getBaseUrl() {
+    const ls = localStorage.getItem('NODE_URL')
+    return ls ?? getDefaultBaseUrlTestnet()
+}
+
+function setBaseUrl(url) {
+    localStorage.setItem('NODE_URL', url)
+}
+
+const BASE_URL = getBaseUrl();
+
+(() => {
+    createNav(document)
 })();

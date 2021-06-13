@@ -1,7 +1,22 @@
+const nodeForm = document.getElementById('nodeUrlSetForm');
+nodeForm.addEventListener('submit', (e) =>{
+    e.preventDefault();
+    setBaseUrl(nodeForm["inputNodeUrl"].value)
+    location.reload()
+});
+nodeForm["inputNodeUrl"].value = BASE_URL
+
+document.getElementById('nodeUrlSetDefaultTestnet').addEventListener('click', () => {
+    nodeForm["inputNodeUrl"].value = getDefaultBaseUrlTestnet()
+});
+
+document.getElementById('nodeUrlSetDefaultMainnet').addEventListener('click', () => {
+    nodeForm["inputNodeUrl"].value = getDefaultBaseUrlMainnet()
+});
 
 (async () => {
     /**
-     * Node URL
+     * Node Info
      */
     const nodePromise = fetch(`${BASE_URL}/node/info`)
         .then(res => res.json())
@@ -31,11 +46,11 @@
     const nodeInfo = [
         { key: "使用ノード", value: BASE_URL },
         { key: "Node Version", value: parseNodeVersion(result.node.version) },
-        { key: "Generation Hash", value: result.node.networkGenerationHashSeed },
+        // { key: "Generation Hash", value: result.node.networkGenerationHashSeed },
         { key: "Height", value: result.chain.height },
         { key: "Network", value: result.network.identifier },
-        { key: "Deployment", value: `${result.server.deploymentTool}@${result.server.deploymentToolVersion}` },
-        { key: "Last Updated", value: result.server.lastUpdatedDate },
+        // { key: "Deployment", value: `${result.server.deploymentTool}@${result.server.deploymentToolVersion}` },
+        // { key: "Last Updated", value: result.server.lastUpdatedDate },
     ]
 
     const tbody = document.createElement('tbody')

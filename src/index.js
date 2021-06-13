@@ -46,11 +46,11 @@ document.getElementById('nodeUrlSetDefaultMainnet').addEventListener('click', ()
     const nodeInfo = [
         { key: "使用ノード", value: BASE_URL },
         { key: "Node Version", value: parseNodeVersion(result.node.version) },
-        { key: "Generation Hash", value: result.node.networkGenerationHashSeed },
+        // { key: "Generation Hash", value: result.node.networkGenerationHashSeed },
         { key: "Height", value: result.chain.height },
         { key: "Network", value: result.network.identifier },
-        { key: "Deployment", value: `${result.server.deploymentTool}@${result.server.deploymentToolVersion}` },
-        { key: "Last Updated", value: result.server.lastUpdatedDate },
+        // { key: "Deployment", value: `${result.server.deploymentTool}@${result.server.deploymentToolVersion}` },
+        // { key: "Last Updated", value: result.server.lastUpdatedDate },
     ]
 
     const tbody = document.createElement('tbody')

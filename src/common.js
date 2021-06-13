@@ -63,10 +63,7 @@ function addHtmlClassText(add, original) {
     return original + " " + add;
 }
 
-(() => {
-    /**
-     * Create Nav
-     */
+function createNav() {
     const pageList = [
         { href: "account.html", text: "Account" },
         { href: "namespace.html", text: "Namespace" },
@@ -82,4 +79,8 @@ function addHtmlClassText(add, original) {
         li.appendChild(a);
         document.getElementById("navPageList").appendChild(li);
     });
+}
+
+(() => {
+    createNav()
 })();

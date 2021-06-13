@@ -8,6 +8,6 @@ demo https://planethouki.github.io/symbol-merkle-tree-web/
 
 - [ ] 1.0.x.0 compatible
 - [ ] mainnet support
-- [ ] node info display
+- [x] node info display
 - [ ] mosaic namespace detail display
 - [ ] node selection

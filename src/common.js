@@ -35,6 +35,17 @@ function bootstrapPopoverInit() {
     })
 }
 
+function parseNodeVersion(num) {
+    const hex = `00000000${Number(num).toString(16)}`.substr(-8)
+    const strArray = []
+    for (let i = 0; i < 8; i += 2) {
+        const octet = Number(`0x${hex[i]}${hex[i + 1]}`).toString(10)
+        strArray.push(octet)
+    }
+
+    return strArray.join('.')
+}
+
 /**
  *
  * @param {string} add
@@ -71,9 +82,4 @@ function addHtmlClassText(add, original) {
         li.appendChild(a);
         document.getElementById("navPageList").appendChild(li);
     });
-
-    /**
-     * Node URL
-     */
-    document.getElementById("node-url").innerText = BASE_URL;
 })();

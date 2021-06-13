@@ -22,7 +22,12 @@
             console.error(error)
             return { error }
         })
-    if (error) return;
+
+    if (error) {
+        document.getElementById("node-info").innerText = error.toString()
+        return
+    }
+
     const nodeInfo = [
         { key: "使用ノード", value: BASE_URL },
         { key: "Node Version", value: parseNodeVersion(result.node.version) },
@@ -32,6 +37,7 @@
         { key: "Deployment", value: `${result.server.deploymentTool}@${result.server.deploymentToolVersion}` },
         { key: "Last Updated", value: result.server.lastUpdatedDate },
     ]
+
     const tbody = document.createElement('tbody')
     for (let i = 0; i < nodeInfo.length; i++) {
         const tr = document.createElement('tr')

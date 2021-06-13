@@ -1,5 +1,3 @@
-const BASE_URL = "https://dg0nbr5d1ohfy.cloudfront.net";
-
 function endian(hex) {
     const result = [];
     let len = hex.length - 2;
@@ -80,6 +78,21 @@ function createNav(d) {
         d.getElementById("navPageList").appendChild(li);
     });
 }
+
+function getDefaultBaseUrl() {
+    return "https://dg0nbr5d1ohfy.cloudfront.net:443";
+}
+
+function getBaseUrl() {
+    const ls = localStorage.getItem('NODE_URL')
+    return ls ?? getDefaultBaseUrl()
+}
+
+function setBaseUrl(url) {
+    localStorage.setItem('NODE_URL', url)
+}
+
+const BASE_URL = getBaseUrl();
 
 (() => {
     createNav(document)

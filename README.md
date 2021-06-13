@@ -10,6 +10,6 @@ demo https://planethouki.github.io/symbol-merkle-tree-web/
 - [ ] mainnet support
 - [x] node info display
 - [ ] mosaic namespace detail display
-- [ ] node selection
+- [x] node selection
 - [x] unit test
 - [x] github icon move to header

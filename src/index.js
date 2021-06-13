@@ -1,7 +1,17 @@
+const nodeForm = document.getElementById('nodeUrlSetForm');
+nodeForm.addEventListener('submit', (e) =>{
+    e.preventDefault();
+    setBaseUrl(nodeForm["inputNodeUrl"].value)
+    location.reload()
+});
+
+document.getElementById('nodeUrlSetDefault').addEventListener('click', () => {
+    nodeForm["inputNodeUrl"].value = getDefaultBaseUrl()
+});
 
 (async () => {
     /**
-     * Node URL
+     * Node Info
      */
     const nodePromise = fetch(`${BASE_URL}/node/info`)
         .then(res => res.json())

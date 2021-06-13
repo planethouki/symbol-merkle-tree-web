@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/planethouki/symbol-merkle-tree-web#readme",
   "devDependencies": {
-    "gh-pages": "^3.1.0",
-    "serve": "^11.3.2"
+    "gh-pages": "^3.2.0",
+    "serve": "^12.0.0"
   }
 }

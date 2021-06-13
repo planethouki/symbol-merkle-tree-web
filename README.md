@@ -12,4 +12,4 @@ demo https://planethouki.github.io/symbol-merkle-tree-web/
 - [ ] mosaic namespace detail display
 - [ ] node selection
 - [ ] unit test
-- [ ] github icon move to header
+- [x] github icon move to header

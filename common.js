@@ -84,12 +84,12 @@ function getDefaultBaseUrlTestnet() {
 }
 
 function getDefaultBaseUrlMainnet() {
-    return "https://d3rm6ntu3sichx.cloudfront.net:443";
+    return "https://d2jbka2k4ggxp7.cloudfront.net:443";
 }
 
 function getBaseUrl() {
     const ls = localStorage.getItem('NODE_URL')
-    return ls ?? getDefaultBaseUrlTestnet()
+    return ls ?? getDefaultBaseUrlMainnet()
 }
 
 function setBaseUrl(url) {
